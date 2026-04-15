@@ -1,160 +1,160 @@
-# Omniabase Coordinate Discovery
+# OMNIABASE V1
 
-A minimal research prototype for using multi-base observation as a coordinate-discovery method in dynamical systems.
+Omniabase V1 is an experimental multibase structural analysis framework.
 
-This repository does not start from language.  
-It starts from dynamics.
+It does not read meaning.
+It does not interpret intent.
+It does not rely on semantic understanding.
 
-Its core question is:
-
-**Can a phenomenon reveal useful latent structure when the same trajectory is observed simultaneously through multiple numerical bases?**
-
-The working hypothesis is simple:
-
-A single representation may hide structure.  
-A coordinated family of representations may expose it.
-
-The goal is not only to measure stability.  
-The goal is to discover signatures, transitions, and possible latent coordinates that are less obvious in standard human-default representations.
-
----
-
-## Why this exists
-
-Most systems are modeled through a small number of conventional representations:
-
-- decimal values
-- standard coordinates
-- fixed feature sets
-- human-intuitive summaries
-
-These are useful.  
-They are not guaranteed to be structurally optimal.
-
-Omniabase Coordinate Discovery explores a different possibility:
-
-**some regime changes, regularities, or latent signatures may become more visible when the same state sequence is observed across multiple bases at once.**
+It measures how a signal behaves when the same state is represented across multiple numerical bases.
 
 ---
 
 ## Core idea
 
-The repository treats Omniabase not as a truth gate, but as a multi-representation engine.
+A system may look flat, random, or ordinary in one representation while still carrying structural fingerprints across many representations.
 
-The primary task here is not:
+Omniabase tests that possibility directly.
 
-**"is this output stable?"**
+For a given observable, it:
 
-but:
+1. represents the value across bases 2 through 16
+2. extracts simple non-semantic structural signatures
+3. measures how those signatures change across time, regimes, couplings, projections, or generators
 
-**"what becomes visible when representation stops being singular?"**
-
-This shifts Omniabase away from post-hoc judgment and toward coordinate discovery.
-
----
-
-## Initial testbed
-
-The first testbed is the logistic map:
-
-\[
-x_{n+1} = r x_n (1 - x_n)
-\]
-
-This system is simple enough to compute, but rich enough to exhibit:
-
-- fixed points
-- periodic behavior
-- bifurcations
-- chaotic regimes
-
-That makes it a good first target for testing whether multi-base signatures reveal useful structure.
+This makes Omniabase a **pre-semantic structural sensor**.
 
 ---
 
-## Initial objective
+## What V1 currently supports
 
-The first prototype asks:
+Omniabase V1 has benchmark evidence across:
 
-- do multi-base representations produce signatures that differ across regimes?
-- do those signatures change before standard visible regime shifts?
-- can we extract candidate coordinates or pre-features that help distinguish dynamical behavior?
+- 1D discrete systems
+- 2D discrete systems
+- higher-dimensional discrete lattices
+- 3D continuous chaotic flow
+- coupled continuous systems
+- 4D continuous benchmark systems
+- pseudo-random and chaotic number generators
+- structured synthetic signal regimes
 
----
+Tested families include:
 
-## v0 setup
-
-Initial experiment settings:
-
-- system: logistic map
-- r values: 3.50, 3.55, 3.60, 3.70, 3.80, 3.90, 4.00
-- initial state: x0 = 0.123456
-- total iterations: 300
-- burn-in: 100
-- bases: 2 to 16
-- decimal precision per state: 12 digits
-
----
-
-## First experiment
-
-The first experiment will:
-
-1. generate trajectories from the logistic map
-2. convert each state into multiple bases
-3. extract simple cross-base signatures
-4. test whether those signatures separate dynamical regimes
-
-This is a minimal starting point, not a final method.
+- logistic map
+- Hénon map
+- coupled map lattice
+- Lorenz
+- coupled Lorenz
+- hyper-Lorenz-style 4D benchmark
+- LCG / Mersenne Twister / logistic chaos
+- synthetic market-like signals
 
 ---
 
-## Expected output
+## What it measures
 
-The first output of the repository is not a grand theory.
+The current V1 signature family includes simple structural descriptors such as:
 
-It is a simple question:
+- digit sum span
+- repetition span
+- transition diversity / transition-entropy-like score
+- dispersion and mean of these signatures
+- relative deltas across time or parameter scans
 
-**Do multi-base signatures contain usable signal about hidden regime structure?**
+From these, V1 has already produced experimental evidence for:
 
-If yes, the next step is to refine the signatures.  
-If no, the method must be changed early.
-
----
-
-## Research direction
-
-The intended trajectory is:
-
-1. minimal proof on a simple dynamical system
-2. improved multi-base signatures
-3. regime-separation tests
-4. early-shift detection tests
-5. extension to more realistic signals
-
-Possible later applications include:
-
-- anomaly detection
-- forecasting pre-features
-- regime shift sensing
-- system diagnostics
-- representation discovery before modeling
+- regime sensitivity
+- transition amplification
+- order vs event separation
+- realtime structural alerting
+- synchronization measurement
+- noise robustness in tested settings
+- latent-dimension sensitivity in controlled projection benchmarks
+- generator-type discrimination
+- synthetic signal regime discrimination
 
 ---
 
-## Status
+## What Omniabase is not
 
-Early prototype.
+Omniabase V1 is not:
 
-The current phase is focused on:
+- a semantic model
+- a prediction engine by itself
+- a universal entropy test
+- a proof of hidden dimensions
+- a replacement for classical dynamical systems theory
+- a market alpha engine
+- a universal theory of truth
 
-- defining the first experimental setup
-- generating trajectories
-- extracting minimal signatures
-- checking whether anything nontrivial emerges
+V1 is a bounded structural diagnostic layer.
+
+Its strength is not meaning.
+Its strength is **structural footprint sensing under representation change**.
 
 ---
 
-## Author
+## Best current description
 
-**Massimiliano Brighindi**
+The strongest accurate description of Omniabase V1 is:
+
+**a multibase structural diagnostic framework for regime, transition, synchronization, and latent-structure suspicion**
+
+Or more simply:
+
+**a structural sensor that reads signals one representation layer deeper than ordinary single-base observation**
+
+---
+
+## Repository structure
+
+This repository contains:
+
+- experiments
+- benchmark outputs
+- result summaries
+- V1 boundary and scope definition
+
+Suggested reading order:
+
+1. `V1_SCOPE.md`
+2. `RESULTS.md`
+3. experiment files in `experiments/`
+
+---
+
+## Current status
+
+Omniabase V1 is no longer a single intuition.
+
+It is now a benchmarked experimental framework with a bounded claim surface.
+
+The correct next step is not uncontrolled expansion.
+
+It is careful consolidation, clean documentation, and one disciplined V2 direction.
+
+---
+
+## V1 scope boundary
+
+See:
+
+- `V1_SCOPE.md`
+
+for:
+- allowed claims
+- forbidden claims
+- benchmark coverage
+- next-step discipline
+
+---
+
+## Results
+
+See:
+
+- `RESULTS.md`
+
+for the current benchmark record.
+
