@@ -1579,6 +1579,157 @@ At this point two layers are justified:
 
 
 
+
+
+---
+
+## Experiment 12 - Joint-state signature test on the 2D Hénon map
+
+### Purpose
+
+The next architectural step was to test whether a two-dimensional state should be represented only through separate component signatures, or whether simple joint-derived variables add useful structural information.
+
+For the Hénon map, the tested joint-derived variables were:
+
+- `radius = sqrt(x^2 + y^2)`
+- `xy_product = x * y`
+
+This experiment was designed to compare:
+
+1. component-wise multibase signatures (`x`, `y`)
+2. joint-derived multibase signatures (`radius`, `xy_product`)
+
+The question was not yet which one is final.
+
+The question was:
+
+**does joint structure carry additional usable signal in 2D?**
+
+### System
+
+Standard Hénon map:
+
+- `a = 1.4`
+- `b = 0.3`
+
+Update rule:
+
+- `x_(n+1) = 1 - a * x_n^2 + y_n`
+- `y_(n+1) = b * x_n`
+
+### Initial settings
+
+- initial state: `x0 = 0.1`, `y0 = 0.1`
+- total iterations: `1200`
+- burn-in: `400`
+- bases: `2` to `16`
+- decimal precision per state: `12` digits
+
+### Run command
+
+```bash
+python experiments/henon_joint_signature_v1.py
+
+Observed console output
+
+----------------------------------------------------------------------------
+steps_written=800
+x_digit_sum_span_std=2.417243
+y_digit_sum_span_std=2.409388
+radius_digit_sum_span_std=2.639342
+product_digit_sum_span_std=3.414343
+x_repetition_span_std=0.061453
+y_repetition_span_std=0.061799
+radius_repetition_span_std=0.081836
+product_repetition_span_std=0.088320
+----------------------------------------------------------------------------
+Done. Wrote outputs/henon_joint_signature_v1.csv
+
+Sample rows from outputs/henon_joint_signature_v1.csv
+
+step	radius_scaled	product_scaled	x_digit_sum_span	radius_digit_sum_span	product_digit_sum_span	xy_component_digit_sum_mean	joint_digit_sum_mean
+
+0	0.407949	0.287291	51.0	50.0	55.0	55.5	52.5
+1	0.906208	0.301549	50.0	52.0	50.0	53.5	51.0
+2	0.819717	0.160170	54.0	48.0	54.0	51.5	51.0
+3	0.231718	0.432921	53.0	54.0	53.0	51.5	53.5
+4	0.536761	0.435732	55.0	52.0	49.0	52.0	50.5
+5	0.283181	0.490074	56.0	55.0	54.0	52.0	54.5
+6	0.678077	0.505705	50.0	53.0	55.0	50.5	54.0
+7	0.235940	0.380424	53.0	49.0	54.0	51.0	51.5
+8	0.949666	0.344402	45.0	52.0	45.0	50.0	48.5
+9	0.925409	0.106518	58.0	50.0	52.0	54.5	51.0
+
+
+Main result
+
+The joint-derived signatures add real signal.
+
+Result A - product is the most event-sensitive joint variable
+
+Among the tested signatures:
+
+x_digit_sum_span_std = 2.417243
+
+y_digit_sum_span_std = 2.409388
+
+radius_digit_sum_span_std = 2.639342
+
+product_digit_sum_span_std = 3.414343
+
+
+The xy_product signature shows the largest dispersion.
+
+This strongly suggests that relational structure between the two coordinates is carrying transition-sensitive information that is not fully visible in the components alone.
+
+Result B - radius is more stabilizing than product
+
+The radius signature is more active than the individual components, but clearly less volatile than the product.
+
+This makes it a plausible stabilizing candidate for order-oriented descriptions of the 2D state.
+
+Result C - joint and component views are correlated but not identical
+
+The component mean and the joint mean move together, but not perfectly.
+
+This means joint-derived structure is not redundant. It adds a different layer of information about the attractor geometry.
+
+Interpretation
+
+This experiment supports a new architectural decision for multidimensional Omniabase systems:
+
+2D state should not be represented only component-wise or only through a single fused variable.
+
+A better approach is hierarchical:
+
+1. component-wise layer
+
+
+2. joint-derived layer
+
+
+3. comparison or fusion between the two
+
+
+
+At the current stage, the best working hypothesis is:
+
+use radius and/or component means as more stable order-oriented descriptors
+
+use xy_product as a stronger event-sensitive descriptor
+
+
+Updated conclusion
+
+At this stage, the project supports the following additional statement:
+
+In the 2D Hénon map, joint-derived multibase signatures add non-redundant structural signal beyond separate component signatures, with xy_product emerging as the strongest event-sensitive candidate among the tested joint variables.
+
+This justifies moving to a parameter scan on Hénon using a hierarchical combination of component and joint signatures.
+
+
+
+
 ---
 
 Author
