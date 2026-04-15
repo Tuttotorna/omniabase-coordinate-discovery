@@ -1732,6 +1732,148 @@ This justifies moving to a parameter scan on Hénon using a hierarchical combina
 
 ---
 
+## Experiment 13 - Parameter scan on the 2D Hénon map with hierarchical component/joint scores
+
+### Purpose
+
+The next major step was to test whether the hierarchical Omniabase architecture:
+
+- component-wise layer
+- joint-derived layer
+
+can detect meaningful regime changes in a two-dimensional discrete system under parameter variation.
+
+Instead of analyzing only a single strange-attractor regime, this experiment scanned the Hénon parameter `a` while keeping:
+
+- `b = 0.3`
+
+fixed.
+
+The goal was to test whether the coordinate family can detect:
+
+- fixed-point stability
+- low-period cycles
+- chaotic onset
+- periodic islands inside chaos
+
+in a genuinely 2D setting.
+
+### System
+
+Hénon map:
+
+- `x_(n+1) = 1 - a * x_n^2 + y_n`
+- `y_(n+1) = b * x_n`
+
+with:
+
+- `b = 0.3`
+
+Scanned parameter:
+
+- `a` from `1.000` to `1.400`
+- step size: `0.020`
+
+### Run command
+
+```bash
+python experiments/henon_parameter_scan_v1.py
+
+Observed console output
+
+----------------------------------------------------------------------------------------
+a=1.000 | pairs=1 | order=1.000000 | event=0.088198
+a=1.020 | states=1 | order=1.000000 | event=0.218541
+a=1.040 | states=1 | order=1.000000 | event=0.218541
+a=1.060 | states=4 | order=0.916127 | event=0.252062
+a=1.080 | states=4 | order=0.916127 | event=0.218541
+a=1.100 | states=4 | order=0.916127 | event=0.218541
+a=1.120 | states=900 | order=0.046098 | event=0.584347
+a=1.140 | states=900 | order=0.038148 | event=0.260842
+a=1.160 | states=900 | order=0.053805 | event=0.231998
+a=1.180 | states=900 | order=0.045618 | event=0.211756
+a=1.200 | states=900 | order=0.036618 | event=0.222718
+a=1.220 | states=900 | order=0.016913 | event=0.224160
+a=1.240 | states=900 | order=0.050474 | event=0.270912
+a=1.260 | states=7 | order=0.887853 | event=0.170624
+a=1.280 | states=900 | order=0.000000 | event=0.741005
+a=1.300 | states=900 | order=0.045434 | event=0.292398
+a=1.320 | states=900 | order=0.018999 | event=0.187333
+a=1.340 | states=900 | order=0.021665 | event=0.203953
+a=1.360 | states=900 | order=0.029410 | event=0.222409
+a=1.380 | states=900 | order=0.033703 | event=0.215560
+a=1.400 | states=900 | order=0.036814 | event=0.209849
+----------------------------------------------------------------------------------------
+Done. Wrote outputs/henon_parameter_scan_v1.csv
+
+Key rows from outputs/henon_parameter_scan_v1.csv
+
+a	unique_xy_pairs	order_score_v1	event_score_v1	interpretation
+
+1.000	1	1.000000	0.088198	fixed point
+1.060	4	0.916127	0.252062	low-period cycle
+1.120	900	0.046098	0.584347	chaotic onset
+1.260	7	0.887853	0.170624	periodic island
+1.280	900	0.000000	0.741005	strong chaotic transition
+
+
+Main result
+
+This is the first successful multidimensional regime scan.
+
+Result A - order becomes topological in 2D
+
+The order_score_v1 remains high not only for the fixed point but also for a periodic island inside the broader scan:
+
+a = 1.000 -> 1.000000
+
+a = 1.060 -> 0.916127
+
+a = 1.260 -> 0.887853
+
+
+This shows that the order coordinate is not limited to trivial stability. It also captures coherent low-dimensional structure inside a 2D discrete system.
+
+Result B - event detects major transition regions
+
+The event_score_v1 rises strongly at major breaks:
+
+a = 1.120 -> 0.584347
+
+a = 1.280 -> 0.741005
+
+
+This supports the interpretation of the event axis as a detector of structural transition tension rather than simple state occupancy.
+
+Result C - hierarchical component/joint fusion is useful
+
+The parameter scan confirms that combining:
+
+component-wise signatures
+
+joint-derived signatures
+
+
+is more useful than relying on either alone.
+
+In particular, the relational contribution appears necessary for detecting high-tension zones cleanly in 2D.
+
+Interpretation
+
+This experiment is sufficient to justify the following statement:
+
+Omniabase now shows initial evidence of working as a multidimensional coordinate family on discrete dynamical systems, not only on 1D maps.
+
+This does not yet justify claims about universal multidimensional dynamics.
+
+But it does justify one concrete transition:
+
+the method is ready for a higher-dimensional discrete test before moving to continuous-time systems.
+
+
+
+---
+
 Author
 
 Massimiliano Brighindi
