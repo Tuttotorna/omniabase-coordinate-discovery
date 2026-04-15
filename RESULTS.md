@@ -1453,6 +1453,130 @@ This is the minimum robustness threshold needed before testing a second dynamica
 
 
 
+---
+
+## Experiment 11 - Initial multibase scan on the 2D Hénon map
+
+### Purpose
+
+The first step beyond the logistic map was to test whether Omniabase signatures remain meaningful on a discrete two-dimensional dynamical system.
+
+The Hénon map is the minimum serious extension beyond the 1D case:
+
+- two-dimensional state
+- discrete-time dynamics
+- strange attractor regime under standard parameters
+
+This makes it a useful test for whether multibase signatures are extracting structure from the attractor geometry rather than only from a scalar time series.
+
+### System
+
+Standard Hénon map:
+
+- `a = 1.4`
+- `b = 0.3`
+
+Update rule:
+
+- `x_(n+1) = 1 - a * x_n^2 + y_n`
+- `y_(n+1) = b * x_n`
+
+### Initial settings
+
+- initial state: `x0 = 0.1`, `y0 = 0.1`
+- total iterations: `1200`
+- burn-in: `400`
+- bases: `2` to `16`
+- decimal precision per state: `12` digits
+
+### Run command
+
+```bash
+python experiments/henon_multibase_v0.py
+
+Observed console output
+
+------------------------------------------------------------------------
+steps_written=800
+x_digit_sum_span_std=2.417243
+x_repetition_span_std=0.061453
+y_digit_sum_span_std=2.409388
+y_repetition_span_std=0.061799
+------------------------------------------------------------------------
+Done. Wrote outputs/henon_multibase_v0.csv
+
+Sample rows from outputs/henon_multibase_v0.csv
+
+step	x	y	x_scaled	y_scaled	x_digit_sum_span	x_repetition_span	y_digit_sum_span	y_repetition_span	xy_digit_sum_span_mean	xy_repetition_span_mean
+
+0	-0.370335	0.354145	0.353457	0.852431	51.0	0.090909	60.0	0.181818	55.5	0.136364
+1	1.162235	-0.111100	0.941324	0.301280	50.0	0.181818	57.0	0.181818	53.5	0.181818
+2	-1.002237	0.348671	0.111100	0.845950	54.0	0.090909	49.0	0.090909	51.5	0.090909
+3	-0.057396	-0.300671	0.473507	0.076822	53.0	0.090909	50.0	0.090909	51.5	0.090909
+4	0.694770	-0.017219	0.761928	0.412431	55.0	0.090909	49.0	0.181818	52.0	0.136364
+5	0.307525	0.208431	0.613374	0.679599	56.0	0.181818	48.0	0.090909	52.0	0.136364
+6	0.875953	0.092258	0.831435	0.542055	50.0	0.181818	51.0	0.090909	50.5	0.136364
+7	-0.170668	0.262786	0.430049	0.743953	53.0	0.090909	49.0	0.090909	51.0	0.090909
+8	1.222049	-0.051200	0.964270	0.372198	45.0	0.090909	55.0	0.090909	50.0	0.090909
+9	-1.140884	0.366615	0.057913	0.867195	58.0	0.272727	51.0	0.090909	54.5	0.181818
+
+
+Main result
+
+The first 2D scan is successful.
+
+Result A - multibase signal remains active in 2D
+
+The signature dispersions remain clearly nontrivial across the attractor:
+
+x_digit_sum_span_std = 2.417243
+
+y_digit_sum_span_std = 2.409388
+
+x_repetition_span_std = 0.061453
+
+y_repetition_span_std = 0.061799
+
+
+So the method does not collapse when moving from 1D to 2D.
+
+Result B - x and y show strong structural symmetry
+
+The x and y span statistics are extremely close.
+
+This is consistent with the Hénon structure, since y_(n+1) is directly derived from x_n.
+
+That suggests the multibase complexity of one component is structurally reflected in the other.
+
+Result C - no ordered-collapse signature appears in the standard strange-attractor regime
+
+The observed span means remain active and distributed. There is no collapse toward near-zero signatures of the kind seen in periodic windows of the logistic map.
+
+This is consistent with the fact that the standard Hénon parameters lie in a strange-attractor regime rather than a simple periodic one.
+
+Interpretation
+
+This first 2D experiment does not yet answer how Omniabase should represent multidimensional state.
+
+But it establishes an important starting point:
+
+multibase signatures remain meaningful in a two-dimensional discrete system.
+
+The next architectural question is therefore not whether the method survives 2D.
+
+It is:
+
+how should 2D state be represented most usefully for Omniabase?
+
+At this point two layers are justified:
+
+1. component-wise signatures (x, y)
+
+
+2. simple joint-derived signatures from the full state
+
+
+
 
 
 ---
