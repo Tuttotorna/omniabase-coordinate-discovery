@@ -744,6 +744,185 @@ It suggests that Omniabase is not merely reacting to explosive regime changes. I
 
 ---
 
+Experiment 7 - Separation of state-like order and event-like tension
+
+Purpose
+
+The next refinement step was to separate two functions that were still blended inside transition_score_v1:
+
+1. order-like structure
+
+
+2. event-like transition stress
+
+
+
+This was necessary because the previous synthetic score was useful as an event detector, but still mixed:
+
+latent regime order
+
+transition edge intensity
+
+local instability inside already-ordered zones
+
+
+The goal of this experiment was to test whether Omniabase can generate two distinct coordinates:
+
+order_score_v1
+
+event_score_v1
+
+
+rather than a single mixed signal.
+
+Run command
+
+python experiments/build_state_event_scores_v1.py
+
+Observed console output
+
+--------------------------------------------------------------------------------
+r=3.540 | states=4 | order=0.941646 | event=0.113063
+r=3.542 | states=4 | order=0.939832 | event=0.117144
+r=3.544 | states=8 | order=0.916843 | event=0.364402
+r=3.546 | states=8 | order=0.911689 | event=0.334460
+r=3.548 | states=8 | order=0.907063 | event=0.337775
+r=3.550 | states=8 | order=0.900700 | event=0.311746
+r=3.552 | states=8 | order=0.896730 | event=0.288599
+r=3.554 | states=8 | order=0.890545 | event=0.301550
+r=3.556 | states=8 | order=0.885507 | event=0.291746
+r=3.558 | states=8 | order=0.879252 | event=0.302324
+r=3.560 | states=8 | order=0.873480 | event=0.297463
+r=3.562 | states=8 | order=0.865034 | event=0.316492
+r=3.564 | states=8 | order=0.858542 | event=0.302551
+r=3.566 | states=16 | order=0.835165 | event=0.470530
+r=3.568 | states=243 | order=0.454228 | event=0.428459
+r=3.570 | states=250 | order=0.444265 | event=0.395655
+r=3.572 | states=250 | order=0.438861 | event=0.418721
+r=3.574 | states=250 | order=0.445805 | event=0.311746
+r=3.576 | states=250 | order=0.442491 | event=0.371261
+r=3.578 | states=250 | order=0.444701 | event=0.297441
+r=3.580 | states=250 | order=0.437648 | event=0.402324
+r=3.582 | states=250 | order=0.439292 | event=0.299105
+r=3.584 | states=250 | order=0.434948 | event=0.364413
+r=3.586 | states=250 | order=0.429871 | event=0.375628
+r=3.588 | states=250 | order=0.428994 | event=0.336181
+r=3.590 | states=250 | order=0.427431 | event=0.347596
+r=3.592 | states=250 | order=0.426951 | event=0.341144
+r=3.594 | states=250 | order=0.430286 | event=0.283155
+r=3.596 | states=250 | order=0.428153 | event=0.339618
+r=3.598 | states=250 | order=0.425677 | event=0.347530
+r=3.600 | states=250 | order=0.426514 | event=0.311746
+r=3.602 | states=250 | order=0.427929 | event=0.307221
+r=3.604 | states=250 | order=0.427173 | event=0.320257
+r=3.606 | states=250 | order=0.423062 | event=0.366228
+r=3.608 | states=250 | order=0.429002 | event=0.222723
+r=3.610 | states=250 | order=0.423903 | event=0.380064
+--------------------------------------------------------------------------------
+Done. Wrote outputs/logistic_map_state_event_scores_v1.csv
+
+Key rows from outputs/logistic_map_state_event_scores_v1.csv
+
+r	unique_states	x_std	digit_sum_span_std	repetition_span_std	order_score_v1	event_score_v1
+
+3.540	4	0.209150	1.812319	0.000000	0.941646	0.113063
+3.542	4	0.209308	1.834257	0.000000	0.939832	0.117144
+3.544	8	0.209634	1.954002	0.026830	0.916843	0.364402
+3.564	8	0.211443	2.659223	0.040600	0.858542	0.302551
+3.566	16	0.211531	2.846506	0.049449	0.835165	0.470530
+3.568	243	0.211560	2.920556	0.052844	0.454228	0.428459
+3.610	250	0.212632	3.197940	0.052150	0.423903	0.380064
+
+
+Main result
+
+This separation is real.
+
+Result A - order score behaves like a regime coordinate
+
+In periodic regimes, order_score_v1 remains high:
+
+r = 3.540 -> 0.941646
+
+r = 3.542 -> 0.939832
+
+
+As the system moves through bifurcation and toward chaos, order_score_v1 degrades gradually and then drops sharply:
+
+r = 3.566 -> 0.835165
+
+r = 3.568 -> 0.454228
+
+
+This is a much cleaner state distinction than the mixed transition score alone.
+
+Result B - event score peaks near structural changes
+
+event_score_v1 remains relatively low in stable periodic zones:
+
+r = 3.540 -> 0.113063
+
+r = 3.542 -> 0.117144
+
+
+It rises sharply at the first visible period-doubling:
+
+r = 3.544 -> 0.364402
+
+
+It reaches a strong local maximum near the transition into dense chaotic occupancy:
+
+r = 3.566 -> 0.470530
+
+
+This confirms that the event coordinate is capturing structural change more directly than the state coordinate.
+
+Result C - order and event are no longer the same signal
+
+The important outcome is not only that both scores move. It is that they move differently.
+
+order_score_v1 tracks the degree of structural organization
+
+event_score_v1 tracks the intensity of change or instability
+
+
+This means the repository now has the first version of a genuine coordinate pair rather than a single blended detector.
+
+Interpretation
+
+This is the first point where the project starts to look less like a single metric and more like a small coordinate system.
+
+The logistic map is no longer described only through:
+
+raw state values
+
+simple variance
+
+periodicity count
+
+
+It is now described through two Omniabase-derived axes:
+
+order
+
+event
+
+
+This is a stronger result than transition detection alone.
+
+Updated conclusion
+
+At this stage, the project supports the following stronger statement:
+
+Omniabase Coordinate Discovery can produce at least two partially distinct coordinates on the logistic map: one associated with structural order, and one associated with transition tension.
+
+This remains early-stage.
+
+But it is now fair to say that the method is beginning to map the system as a structured phase-space description, not just as a sequence of isolated indicators.
+
+
+---
+
 Current conclusion
 
 The current prototype supports the following statements:
@@ -764,6 +943,9 @@ The current prototype supports the following statements:
 
 
 6. The score shows initial evidence of detecting ordered windows embedded inside chaos.
+
+
+7. Omniabase can produce at least two partially distinct coordinates on the logistic map: one associated with structural order, and one associated with transition tension.
 
 
 
@@ -790,6 +972,8 @@ synthetic event score: confirmed
 
 ordered-window detection inside chaos: initial evidence confirmed
 
+state/event coordinate separation: initial evidence confirmed
+
 
 
 ---
@@ -805,7 +989,7 @@ state-like structure
 event-like tension
 
 
-At the moment, transition_score_v1 partially blends both.
+At the moment, the first coordinate pair is promising, but still preliminary.
 
 The immediate target is to improve the coordinate family on the logistic map until it can distinguish more cleanly between:
 
