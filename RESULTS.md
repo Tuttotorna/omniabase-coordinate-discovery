@@ -1175,6 +1175,138 @@ This is still early-stage and should remain stated carefully.
 
 But it is now justified to say that the method is beginning to map the logistic system with a real two-axis structural description rather than with a single blended detector.
 
+
+Sì. Prima si salva.
+
+Ma con una correzione importante:
+
+il test è buono, però la frase “robustezza dimostrata” è ancora troppo forte.
+Perché in questo script gli score clean e noisy sono normalizzati separatamente per condizione. Quindi il confronto assoluto tra valori puliti e rumorosi va interpretato con cautela.
+
+La formula vera è:
+
+## Experiment 9 - Noise robustness test on the logistic-map coordinate family
+
+### Purpose
+
+The next stress test was to inject controlled stochastic noise into the logistic map and check whether the coordinate family still preserves the same qualitative distinctions between:
+
+- periodic regime
+- transition regime
+- ordered island inside chaos
+- chaotic regime
+
+This matters because success on a perfectly clean deterministic system is not enough.
+A useful coordinate family should retain at least part of its qualitative geometry under mild perturbation.
+
+### Noise setting
+
+Gaussian noise was added after each logistic-map update with:
+
+- `noise_std = 0.0005`
+- fixed random seed: `42`
+
+### Run command
+
+```bash
+python experiments/logistic_map_noise_robustness_v1.py
+
+Observed console output
+
+----------------------------------------------------------------------------------------
+clean | r=3.540 | states=4 | order=0.814310 | event=0.011666 | mixed=0.000000
+clean | r=3.566 | states=54 | order=0.763420 | event=0.297441 | mixed=0.297441
+clean | r=3.829 | states=3 | order=0.814310 | event=0.301550 | mixed=0.301550
+clean | r=3.851 | states=300 | order=0.231945 | event=0.584102 | mixed=0.584102
+----------------------------------------------------------------------------------------
+noisy | r=3.540 | states=300 | order=0.811565 | event=0.038332 | mixed=0.038332
+noisy | r=3.566 | states=300 | order=0.730302 | event=0.320478 | mixed=0.347963
+noisy | r=3.829 | states=300 | order=0.735237 | event=0.297441 | mixed=0.297441
+noisy | r=3.851 | states=300 | order=0.222712 | event=0.580036 | mixed=0.584102
+----------------------------------------------------------------------------------------
+Done. Wrote outputs/logistic_map_noise_robustness_v1.csv
+
+Key rows from outputs/logistic_map_noise_robustness_v1.csv
+
+condition	r	unique_states	x_std	order_score_v1	event_score_v1	transition_score_v1
+
+clean	3.540	4	0.366432	0.814310	0.011666	0.000000
+clean	3.566	54	0.370334	0.763420	0.297441	0.297441
+clean	3.829	3	0.246869	0.814310	0.301550	0.301550
+clean	3.851	300	0.252063	0.231945	0.584102	0.584102
+noisy	3.540	300	0.366465	0.811565	0.038332	0.038332
+noisy	3.566	300	0.370346	0.730302	0.320478	0.347963
+noisy	3.829	300	0.246898	0.735237	0.297441	0.297441
+noisy	3.851	300	0.252069	0.222712	0.580036	0.584102
+
+
+Main result
+
+The result is encouraging.
+
+Result A - qualitative order separation survives mild noise
+
+Under noise, unique_states becomes saturated because jitter makes nearly every sampled value distinct.
+
+However, order_score_v1 still preserves a strong separation between:
+
+ordered/structured regimes
+
+chaotic regimes
+
+
+For example, in the noisy condition:
+
+r = 3.540 -> order_score_v1 = 0.811565
+
+r = 3.829 -> order_score_v1 = 0.735237
+
+r = 3.851 -> order_score_v1 = 0.222712
+
+
+This suggests that the coordinate family is not relying only on raw uniqueness counts.
+
+Result B - the chaotic regime still carries the strongest event load
+
+In the noisy condition:
+
+r = 3.851 -> event_score_v1 = 0.580036
+
+
+This remains the strongest event value in the tested set, consistent with the idea that the coordinate family still recognizes the most unstable regime as the highest transition/tension zone.
+
+Result C - the ordered island inside chaos remains partially distinguishable
+
+Even under noise:
+
+r = 3.829 retains much higher order than r = 3.851
+
+
+This is important because it suggests that the ordered window is not completely erased by mild perturbation at the level of the Omniabase-derived coordinates.
+
+Interpretation
+
+This is not yet a proof of full robustness.
+
+A technical caution is necessary:
+
+the current scoring pipeline normalizes the clean and noisy conditions separately, so absolute cross-condition score comparison should be interpreted carefully.
+
+What this experiment does support is a weaker but still important claim:
+
+the qualitative geometry of the coordinate family appears to survive mild noise.
+
+That is already useful.
+
+Updated conclusion
+
+At this stage, the project supports the following additional statement:
+
+The preliminary order/event coordinate family shows initial qualitative robustness under mild stochastic perturbation on the logistic map.
+
+This should still be treated as initial evidence, not as a final robustness claim.
+
+
 ---
 
 Author
