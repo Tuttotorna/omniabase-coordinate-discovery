@@ -495,7 +495,264 @@ test whether the effect holds on additional dynamical systems
 
 test whether the apparent anticipation is robust or accidental
 
+---
 
+
+
+---
+
+## Experiment 5 — Synthetic transition score v1
+
+### Purpose
+
+A synthetic score was introduced to move from dispersed indicators to a single composite measure of structural transition pressure.
+
+The goal was to test whether a unified Omniabase score could act as a practical detector of:
+
+- transition events
+- pre-transition tension
+- regime instability concentration
+
+rather than requiring manual inspection of multiple raw metrics.
+
+### Run command
+
+```bash id="j6229q"
+python experiments/build_transition_score_v1.py
+
+Observed console output
+
+------------------------------------------------------------------------
+r=3.540 | states=4 | x_std=0.20914972 | digit_span=1.81231895 | rep_span=0.00000000 | score=0.011666
+r=3.542 | states=4 | x_std=0.20930776 | digit_span=1.83425734 | rep_span=0.00000000 | score=0.046356
+r=3.544 | states=8 | x_std=0.20963384 | digit_span=1.95400230 | rep_span=0.02682977 | score=0.347596
+r=3.546 | states=8 | x_std=0.20980481 | digit_span=2.01633950 | rep_span=0.03531086 | score=0.311746
+r=3.548 | states=8 | x_std=0.20997787 | digit_span=2.07228738 | rep_span=0.04060010 | score=0.313498
+r=3.550 | states=8 | x_std=0.21015307 | digit_span=2.14927313 | rep_span=0.04060010 | score=0.264789
+r=3.552 | states=8 | x_std=0.21033045 | digit_span=2.19730030 | rep_span=0.04060010 | score=0.222723
+r=3.554 | states=8 | x_std=0.21051004 | digit_span=2.27211355 | rep_span=0.04060010 | score=0.244302
+r=3.556 | states=8 | x_std=0.21069189 | digit_span=2.33304522 | rep_span=0.04060010 | score=0.226343
+r=3.558 | states=8 | x_std=0.21087602 | digit_span=2.40870814 | rep_span=0.04060010 | score=0.241516
+r=3.560 | states=8 | x_std=0.21106250 | digit_span=2.47853283 | rep_span=0.04060010 | score=0.228966
+r=3.562 | states=8 | x_std=0.21125134 | digit_span=2.58069757 | rep_span=0.04060010 | score=0.265744
+r=3.564 | states=8 | x_std=0.21144259 | digit_span=2.65922333 | rep_span=0.04060010 | score=0.231945
+r=3.566 | states=16 | x_std=0.21153139 | digit_span=2.84650630 | rep_span=0.04944882 | score=0.457850
+r=3.568 | states=243 | x_std=0.21155990 | digit_span=2.92055620 | rep_span=0.05284358 | score=0.370881
+r=3.570 | states=250 | x_std=0.21160416 | digit_span=2.95155107 | rep_span=0.05293208 | score=0.323521
+r=3.572 | states=250 | x_std=0.21163155 | digit_span=3.01691285 | rep_span=0.05364175 | score=0.354674
+r=3.574 | states=250 | x_std=0.21165431 | digit_span=2.93297598 | rep_span=0.05193635 | score=0.252994
+r=3.576 | states=250 | x_std=0.21168170 | digit_span=2.97305942 | rep_span=0.05187424 | score=0.312953
+r=3.578 | states=250 | x_std=0.21172159 | digit_span=2.94635156 | rep_span=0.05139884 | score=0.245229
+r=3.580 | states=250 | x_std=0.21176161 | digit_span=3.03157204 | rep_span=0.05141011 | score=0.372782
+r=3.582 | states=250 | x_std=0.21180295 | digit_span=3.01168340 | rep_span=0.04996256 | score=0.260842
+r=3.584 | states=250 | x_std=0.21184699 | digit_span=3.06421584 | rep_span=0.04961726 | score=0.325603
+r=3.586 | states=250 | x_std=0.21189396 | digit_span=3.12579133 | rep_span=0.04892404 | score=0.340051
+r=3.588 | states=250 | x_std=0.21194285 | digit_span=3.13632946 | rep_span=0.04899385 | score=0.298155
+r=3.590 | states=250 | x_std=0.21199342 | digit_span=3.15523910 | rep_span=0.04953935 | score=0.314811
+r=3.592 | states=250 | x_std=0.21204689 | digit_span=3.16104764 | rep_span=0.05141206 | score=0.315132
+r=3.594 | states=250 | x_std=0.21210166 | digit_span=3.12071833 | rep_span=0.05151515 | score=0.254189
+r=3.596 | states=250 | x_std=0.21216010 | digit_span=3.14652433 | rep_span=0.05151515 | score=0.314646
+r=3.598 | states=250 | x_std=0.21221976 | digit_span=3.17646698 | rep_span=0.05151515 | score=0.324316
+r=3.600 | states=250 | x_std=0.21228227 | digit_span=3.16634845 | rep_span=0.05191061 | score=0.288924
+r=3.602 | states=250 | x_std=0.21234720 | digit_span=3.14923145 | rep_span=0.05193420 | score=0.283155
+r=3.604 | states=250 | x_std=0.21241470 | digit_span=3.15838081 | rep_span=0.05193420 | score=0.309059
+r=3.606 | states=250 | x_std=0.21248464 | digit_span=3.20815454 | rep_span=0.05191061 | score=0.366228
+r=3.608 | states=250 | x_std=0.21255755 | digit_span=3.13627581 | rep_span=0.05202450 | score=0.207865
+r=3.610 | states=250 | x_std=0.21263155 | digit_span=3.19794033 | rep_span=0.05215007 | score=0.380064
+------------------------------------------------------------------------
+mean_score=0.283995
+max_score=0.457850
+min_score=0.011666
+Done. Wrote outputs/logistic_map_transition_score_v1.csv
+
+Condensed score table
+
+r	unique_states	x_std	digit_sum_span_std	repetition_span_std	transition_score_v1
+
+3.540	4	0.20914972	1.81231895	0.00000000	0.011666
+3.542	4	0.20930776	1.83425734	0.00000000	0.046356
+3.544	8	0.20963384	1.95400230	0.02682977	0.347596
+3.566	16	0.21153139	2.84650630	0.04944882	0.457850
+3.568	243	0.21155990	2.92055620	0.05284358	0.370881
+3.610	250	0.21263155	3.19794033	0.05215007	0.380064
+
+
+Main result of Experiment 5
+
+The synthetic score works, but it has a specific character:
+
+it is strong as a transition-event detector
+
+it is not yet a clean state estimator
+
+
+Result A — first transition marked sharply
+
+The first period-doubling transition is strongly marked:
+
+r = 3.542 -> score 0.046356
+
+r = 3.544 -> score 0.347596
+
+
+This is a large jump despite only a weak change in simple scalar variance.
+
+Result B — strongest peak near explosion into chaos
+
+The maximum score appears at:
+
+r = 3.566
+
+transition_score_v1 = 0.457850
+
+
+This is exactly the region where the system leaves clearly periodic behavior and explodes toward chaotic occupancy.
+
+Result C — pre-transition tension exists
+
+Before the visible state jump:
+
+r = 3.540 -> score 0.011666
+
+r = 3.542 -> score 0.046356
+
+
+This is already a large relative increase while unique_states remains unchanged.
+
+So the score preserves the earlier result: Omniabase appears to detect pre-transition tension before obvious scalar summaries react strongly.
+
+Result D — chaotic region keeps breathing
+
+After the main transition, the score does not stay saturated. It oscillates roughly between 0.20 and 0.38.
+
+This suggests the score is still reacting to internal structural modulation inside chaos, rather than collapsing into a flat “chaos = maximum” indicator.
+
+Interpretation
+
+At its current stage, transition_score_v1 should be interpreted as:
+
+a detector of structural events and transition stress
+
+not yet as:
+
+a canonical scalar measure of regime identity
+
+This distinction matters.
+
+The score is already useful. But its current weighting gives strong influence to local relative jumps, so it is event-sensitive by construction.
+
+
+---
+
+Updated conclusion
+
+At this point the project supports two separate claims:
+
+1. Omniabase signatures can amplify and partially anticipate regime transitions.
+
+
+2. A synthetic Omniabase score can compress those effects into a practical event detector.
+
+
+
+The next question is stricter:
+
+Can the score also detect ordered windows inside chaos?
+
+If yes, then the method is not merely detecting explosive edges. It is detecting latent structure more generally.
+
+This motivates the next experiment around the known periodic window near r ~ 3.83.
+
+---
+
+**2. Nuovo file**  
+`NEXT_STEPS.md`
+
+**Contenuto completo**
+```md id="84931"
+# Next Steps
+
+## Current position
+
+The repository now has three stable findings on the logistic map:
+
+1. raw multi-base signatures track periodic regimes correctly
+2. cross-base signatures amplify transition regions more strongly than simple scalar variance
+3. a first synthetic score (`transition_score_v1`) behaves as a strong event detector
+
+---
+
+## What is now known
+
+### Confirmed
+
+- periodic tracking works
+- transition amplification works
+- pre-transition sensitivity has initial evidence
+- the synthetic score is effective at highlighting regime breaks
+
+### Not yet confirmed
+
+- whether the score is a good state estimator
+- whether the score cleanly detects windows of order inside chaos
+- whether the anticipation effect is robust across systems
+
+---
+
+## Immediate next experiment
+
+The next correct test is a local scan around the periodic window near:
+
+- `r ~ 3.83`
+
+This test matters because it separates two possibilities:
+
+### Possibility A
+
+The current score is only reacting to violent transitions and local discontinuities.
+
+### Possibility B
+
+The current score is detecting deeper latent structure, and should therefore drop inside a stable periodic window embedded in chaos.
+
+If possibility B holds, the method becomes significantly stronger.
+
+---
+
+## Hypothesis for the next test
+
+Inside a known periodic window within the chaotic region:
+
+- `transition_score_v1` should decrease
+- the score should rise again near the window boundaries
+- this drop should be sharper or more interpretable than what `x_std` alone provides
+
+---
+
+## Next file to build
+
+```text id="lbn7sw"
+experiments/window_scan_383_v1.py
+
+
+---
+
+Operational rule
+
+Do not change the dynamical system yet.
+
+Do not add complexity yet.
+
+First test whether the current coordinate family can detect:
+
+periodic regimes
+
+transitions
+
+ordered islands inside chaos
+
+
+Only after that decide whether the signature family is robust enough to generalize.
 
 ---
 
