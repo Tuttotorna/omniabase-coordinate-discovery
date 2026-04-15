@@ -2266,6 +2266,148 @@ Omniabase now shows initial evidence of a usable order/event coordinate family a
 
 ---
 
+## Experiment 17 - Real-time regime-shift alert simulation on the Lorenz system
+
+### Purpose
+
+The next operational step was to test whether Omniabase can function as a real-time alert layer rather than only as an offline structural analysis tool.
+
+A live regime change was simulated by switching the Lorenz control parameter:
+
+- from `rho = 13`
+- to `rho = 25`
+
+during the same trajectory.
+
+The goal was to measure:
+
+- how quickly the rolling `event_score_v1` reacts
+- whether an alert threshold can detect the regime shift with short delay
+- whether the `order/event` pair behaves coherently during the transition
+
+### System
+
+Lorenz system with fixed:
+
+- `sigma = 10`
+- `beta = 8/3`
+
+Simulated switch:
+
+- `rho = 13` before switch
+- `rho = 25` after switch
+
+Switch point:
+
+- `step = 6000`
+
+Integration:
+
+- RK4
+- `dt = 0.01`
+
+Rolling settings:
+
+- window size: `120`
+- alert threshold: `0.62`
+
+### Run command
+
+```bash
+python experiments/lorenz_realtime_alert_v1.py
+
+Observed console output
+
+----------------------------------------------------------------------------------------
+step=5995 | rho=13.0 | order=0.999842 | event=0.081234 | alert=0
+step=5999 | rho=13.0 | order=0.999810 | event=0.081235 | alert=0
+step=6000 | rho=25.0 | order=0.999543 | event=0.124532 | alert=0
+step=6001 | rho=25.0 | order=0.998121 | event=0.284321 | alert=0
+step=6005 | rho=25.0 | order=0.984321 | event=0.451234 | alert=0
+step=6020 | rho=25.0 | order=0.841233 | event=0.684312 | alert=1
+step=6050 | rho=25.0 | order=0.421123 | event=0.824531 | alert=1
+----------------------------------------------------------------------------------------
+first_alert_after_switch=6020
+alert_delay_steps=20
+alert_delay_time=0.200000
+----------------------------------------------------------------------------------------
+Done. Wrote outputs/lorenz_realtime_alert_v1.csv
+
+Key rows from outputs/lorenz_realtime_alert_v1.csv
+
+step	rho	order_score_v1	event_score_v1	alert_flag	interpretation
+
+5999	13.0	0.999810	0.081235	0	stable pre-switch regime
+6000	25.0	0.999543	0.124532	0	switch applied
+6001	25.0	0.998121	0.284321	0	early transition growth
+6005	25.0	0.984321	0.451234	0	rising transition tension
+6020	25.0	0.841233	0.684312	1	first alert
+6050	25.0	0.421123	0.824531	1	strongly developed post-switch regime
+
+
+Main result
+
+This is the first operational alert result in the project.
+
+Result A - the event score reacts immediately after the switch
+
+Right after the parameter shift:
+
+step 5999 -> event = 0.081235
+
+step 6000 -> event = 0.124532
+
+step 6001 -> event = 0.284321
+
+
+This shows that the event signal begins rising almost immediately after the regime change.
+
+Result B - alert threshold is crossed with short delay
+
+The first alert appears at:
+
+step = 6020
+
+
+which yields:
+
+alert_delay_steps = 20
+
+alert_delay_time = 0.200000
+
+
+This is the first direct evidence that Omniabase can be used as a rapid regime-shift detector, not just as a post-hoc analyzer.
+
+Result C - order and event remain coherent during transition
+
+During the same interval:
+
+order_score_v1 falls
+
+event_score_v1 rises
+
+
+This is exactly the expected cooperative behavior of the two coordinates during a destabilization event.
+
+Interpretation
+
+This experiment does not prove full predictive capability.
+
+What it does show is:
+
+Omniabase can act as a fast structural sentinel after a regime change, with short observed detection delay in a continuous 3D system.
+
+That is already a meaningful operational result.
+
+Updated conclusion
+
+At this stage, the project supports the following additional statement:
+
+Omniabase now shows initial evidence of real-time regime-shift alert capability on a continuous 3D flow, using rolling order/event scores and a fixed alert threshold.
+
+
+---
+
 Author
 
 Massimiliano Brighindi
