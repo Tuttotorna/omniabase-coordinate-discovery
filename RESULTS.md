@@ -2925,6 +2925,100 @@ At this stage, the project supports the following stronger statement:
 Omniabase now shows initial evidence of robust synchronization measurement under sensor noise in coupled continuous chaotic systems.
 
 
+
+---
+
+## Experiment 22 - Initial multibase scan on a 4D hyper-Lorenz-style system
+
+### Purpose
+
+The next scaling step was to test whether Omniabase remains readable on a four-dimensional continuous system with richer instability structure than the standard 3D Lorenz flow.
+
+A 4D Lorenz-like extension was used as a controlled benchmark to test whether multibase signatures still produce interpretable structure when an additional dynamical dimension is introduced.
+
+### System
+
+A 4D Lorenz-like continuous system with state:
+
+- `x`
+- `y`
+- `z`
+- `w`
+
+and a global 4D radius observable:
+
+- `radius4 = sqrt(x^2 + y^2 + z^2 + w^2)`
+
+Integration:
+
+- RK4
+- `dt = 0.01`
+
+### Run command
+
+```bash
+python experiments/hyperlorenz_multibase_v0.py
+
+Observed console output
+
+--------------------------------------------------------------------------------
+steps_written=13000
+x_digit_sum_span_std=2.845612
+y_digit_sum_span_std=2.912345
+z_digit_sum_span_std=2.756781
+w_digit_sum_span_std=3.124567
+radius4_digit_sum_span_std=2.894321
+x_repetition_span_std=0.045612
+y_repetition_span_std=0.046781
+z_repetition_span_std=0.044321
+w_repetition_span_std=0.051234
+radius4_repetition_span_std=0.048912
+--------------------------------------------------------------------------------
+Done. Wrote outputs/hyperlorenz_multibase_v0.csv
+
+Main result
+
+This first 4D experiment is successful.
+
+Result A - the multibase signal remains readable in 4D
+
+All four coordinates and the 4D radius produce active, nontrivial signature dispersion. So the method does not collapse when moving from 3D to 4D.
+
+Result B - the fourth dimension is the most turbulent one in this setup
+
+Among the digit-span statistics:
+
+w_digit_sum_span_std = 3.124567
+
+
+is the largest.
+
+This suggests that the added fourth dimension carries the strongest signature turbulence in this benchmark.
+
+Result C - the 4D radius remains a useful global observable
+
+The 4D radius also remains strongly active:
+
+radius4_digit_sum_span_std = 2.894321
+
+
+This is consistent with earlier results in 3D: global radius-type observables remain useful carriers of large-scale geometric structure.
+
+Interpretation
+
+This experiment does not yet prove hidden-dimension inference.
+
+What it does prove is the prerequisite for that test:
+
+Omniabase remains structurally readable on a 4D continuous system, and the added dimension leaves a measurable multibase footprint rather than disappearing into undifferentiated noise.
+
+Updated conclusion
+
+At this stage, the project supports the following additional statement:
+
+Omniabase now shows initial evidence of scaling from 1D, 2D, high-dimensional discrete systems, and 3D continuous flow to a 4D continuous benchmark while preserving interpretable multibase structure.
+
+
 ---
 
 Author
