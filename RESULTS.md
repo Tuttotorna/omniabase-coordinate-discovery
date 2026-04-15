@@ -1309,6 +1309,154 @@ This should still be treated as initial evidence, not as a final robustness clai
 
 ---
 
+## Experiment 10 - Weight sensitivity test for the order/event coordinate family
+
+### Purpose
+
+The next stress test was to check whether the emerging `order/event` geometry depends too strongly on one specific manual weighting choice.
+
+The goal was not to prove exact numerical invariance.
+The goal was to test **qualitative invariance**:
+
+- ordered islands should remain high in `order_score`
+- transition zones should remain high in `event_score`
+- chaotic regions should remain low in `order_score` and relatively high in `event_score`
+
+under several reasonable weight perturbations.
+
+### Run command
+
+```bash
+python experiments/weight_sensitivity_v1.py
+
+Observed console output
+
+----------------------------------------------------------------------------------------
+order_base + event_base
+ r=3.827 | states=300 | order=0.024227 | event=0.337775
+ r=3.829 | states=3 | order=0.814310 | event=0.011666
+ r=3.845 | states=12 | order=0.705886 | event=0.470530
+ r=3.851 | states=300 | order=0.231945 | event=0.584102
+order_more_unique + event_more_delta
+ r=3.827 | states=300 | order=0.013490 | event=0.395780
+ r=3.829 | states=3 | order=0.803814 | event=0.027000
+ r=3.845 | states=12 | order=0.695393 | event=0.551634
+ r=3.851 | states=300 | order=0.211475 | event=0.588698
+order_more_digit + event_more_static
+ r=3.827 | states=300 | order=0.034963 | event=0.342417
+ r=3.829 | states=3 | order=0.824806 | event=0.000000
+ r=3.845 | states=12 | order=0.716380 | event=0.370591
+ r=3.851 | states=300 | order=0.252414 | event=0.573966
+order_more_rep + event_more_rep_delta
+ r=3.827 | states=300 | order=0.038161 | event=0.375267
+ r=3.829 | states=3 | order=0.772097 | event=0.015000
+ r=3.845 | states=12 | order=0.663673 | event=0.528343
+ r=3.851 | states=300 | order=0.224660 | event=0.613393
+----------------------------------------------------------------------------------------
+Done. Wrote outputs/logistic_map_weight_sensitivity_v1.csv
+
+Key rows from outputs/logistic_map_weight_sensitivity_v1.csv
+
+r	states	order_profile	event_profile	order_score	event_score
+
+3.827	300	order_base	event_base	0.024227	0.337775
+3.827	300	order_more_digit	event_more_static	0.034963	0.342417
+3.829	3	order_base	event_base	0.814310	0.011666
+3.829	3	order_more_rep	event_more_rep_delta	0.772097	0.015000
+3.845	12	order_base	event_base	0.705886	0.470530
+3.845	12	order_more_unique	event_more_delta	0.695393	0.551634
+3.851	300	order_base	event_base	0.231945	0.584102
+3.851	300	order_more_rep	event_more_rep_delta	0.224660	0.613393
+
+
+Main result
+
+The coordinate family is not fragile to reasonable weight perturbations.
+
+Result A - ordered island remains strongly ordered
+
+At r = 3.829, the period-3 window remains strongly high-order across all tested profiles:
+
+0.814310
+
+0.803814
+
+0.824806
+
+0.772097
+
+
+This is far above the neighboring chaotic point at r = 3.827.
+
+Result B - chaotic point remains low-order
+
+At r = 3.827, the chaotic side remains strongly low-order across all tested profiles:
+
+0.024227
+
+0.013490
+
+0.034963
+
+0.038161
+
+
+This preserves a large structural gap relative to the ordered island.
+
+Result C - transition zone remains event-dominant
+
+At r = 3.845, near the exit of the ordered window and onset of the local cascade, event_score remains high across all profiles:
+
+0.470530
+
+0.551634
+
+0.370591
+
+0.528343
+
+
+So the event coordinate still identifies the transition boundary as an event-rich zone.
+
+Result D - dense chaos remains the strongest event region
+
+At r = 3.851, the fully chaotic regime remains the strongest event-loaded point in every tested profile:
+
+0.584102
+
+0.588698
+
+0.573966
+
+0.613393
+
+
+This is strong evidence that the event axis is not a fragile artifact of one specific weighting.
+
+Interpretation
+
+This experiment does not prove universality.
+
+But it does support a strong intermediate claim:
+
+the qualitative order/event geometry is stable under reasonable weight perturbations.
+
+That is enough to justify moving beyond the logistic map.
+
+Updated conclusion
+
+At this stage, the project supports the following stronger statement:
+
+Omniabase Coordinate Discovery yields a preliminary coordinate family whose qualitative geometry remains stable under mild stochastic perturbation and under reasonable weight perturbations on the logistic map.
+
+This is the minimum robustness threshold needed before testing a second dynamical system.
+
+
+
+
+
+---
+
 Author
 
 Massimiliano Brighindi
