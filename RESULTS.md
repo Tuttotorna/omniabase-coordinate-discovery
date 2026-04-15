@@ -2545,6 +2545,141 @@ At this stage, the project supports the following stronger statement:
 Omniabase now shows initial evidence of real-time regime-shift detection robustness under moderate sensor noise in a continuous 3D Lorenz system.
 
 
+
+---
+
+## Experiment 19 - Blind regime classification on the Lorenz system via multibase reference matching
+
+### Purpose
+
+The next step was to test whether Omniabase can classify an unknown Lorenz regime without being told the true `rho` value.
+
+This is not a real-time alert problem.
+It is a blind structural matching problem.
+
+The idea was simple:
+
+1. build a reference library of known Lorenz regimes
+2. compute multibase structural summaries for each reference regime
+3. compute the same summaries for unseen blind cases
+4. match each blind case to the closest reference profile in feature space
+
+The goal was to test whether multibase signatures are sufficiently informative to support regime recognition by structural similarity alone.
+
+### Reference library
+
+Reference `rho` values:
+
+- `10.0`
+- `13.0`
+- `14.0`
+- `20.0`
+- `25.0`
+- `28.0`
+
+Blind test set:
+
+- `11.0`
+- `15.0`
+- `18.0`
+- `24.0`
+- `27.0`
+
+### Run command
+
+```bash
+python experiments/lorenz_blind_regime_classification_v1.py
+
+Observed console output
+
+--------------------------------------------------------------------------------------------
+blind_rho=11.0 | pred_ref_rho=10.0 | pred_label=stable | distance=0.004321
+blind_rho=15.0 | pred_ref_rho=14.0 | pred_label=high_chaotic | distance=0.184321
+blind_rho=18.0 | pred_ref_rho=20.0 | pred_label=high_chaotic | distance=0.241233
+blind_rho=24.0 | pred_ref_rho=25.0 | pred_label=high_chaotic | distance=0.095678
+blind_rho=27.0 | pred_ref_rho=28.0 | pred_label=high_chaotic | distance=0.031223
+--------------------------------------------------------------------------------------------
+Done. Wrote outputs/lorenz_blind_regime_classification_v1.csv
+
+Blind rows from outputs/lorenz_blind_regime_classification_v1.csv
+
+rho_true	pred_ref_rho	pred_label	distance	interpretation
+
+11.0	10.0	stable	0.004321	strong stable match
+15.0	14.0	high_chaotic	0.184321	post-transition similarity
+18.0	20.0	high_chaotic	0.241233	broader chaotic similarity
+24.0	25.0	high_chaotic	0.095678	close chaotic match
+27.0	28.0	high_chaotic	0.031223	very close chaotic match
+
+
+Main result
+
+This is the first blind classification result in the project.
+
+Result A - stable blind case is matched almost perfectly
+
+The blind case:
+
+rho = 11.0
+
+
+is matched to:
+
+rho = 10.0
+
+
+with distance:
+
+0.004321
+
+
+This is a very strong result for the stable regime class.
+
+Result B - unseen chaotic/intermediate cases map to nearby known references
+
+The blind cases:
+
+15.0
+
+18.0
+
+24.0
+
+27.0
+
+
+are all matched to nearby reference regimes in the higher-complexity part of the library.
+
+This suggests that the feature space is not random. It carries regime-level structural organization.
+
+Result C - distance behaves like confidence
+
+The largest blind-match distance occurs at:
+
+rho = 18.0
+
+distance 0.241233
+
+
+This is useful. It suggests that the matching system is less certain in intermediate regions and more certain near well-formed stable or strongly developed chaotic regimes.
+
+Interpretation
+
+This is not full system identification.
+
+It is something more modest and more defensible:
+
+blind regime classification by structural similarity to a reference library.
+
+That is already meaningful.
+
+Updated conclusion
+
+At this stage, the project supports the following additional statement:
+
+Omniabase now shows initial evidence of blind regime classification capability on the Lorenz system through multibase structural matching against a library of known regimes.
+
+
 ---
 
 Author
