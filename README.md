@@ -1,5 +1,7 @@
 # OMNIABASE V1
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19598289.svg)](https://doi.org/10.5281/zenodo.19598289)
+
 Omniabase V1 is an experimental multibase structural analysis framework.
 
 It does not read meaning.
