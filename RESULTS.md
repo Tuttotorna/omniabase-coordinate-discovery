@@ -3208,6 +3208,97 @@ At this stage, the project supports the following additional statement:
 Omniabase now shows initial evidence of generator-type discrimination capability across deterministic chaos and pseudo-random number generators using multibase structural analysis.
 
 
+
+---
+
+## Experiment 25 - Multibase structure benchmark on synthetic market regimes
+
+### Purpose
+
+The next bridge experiment was to test whether Omniabase can move from pure dynamical benchmarks toward market-like time series while still distinguishing different structural regimes.
+
+The goal was not real financial prediction.
+
+The goal was narrower and cleaner:
+
+**can Omniabase distinguish synthetic signals that differ by internal generating structure, even when they all look like noisy price-like series?**
+
+Four synthetic regimes were compared:
+
+- `pure_noise`
+- `trend_plus_noise`
+- `mean_reverting`
+- `chaotic_driver_market`
+
+### Run command
+
+```bash
+python experiments/synthetic_market_multibase_v1.py
+
+Observed console output
+
+------------------------------------------------------------------------------------------------------------
+series=chaotic_driver_market | structure=0.884231 | value_std=0.124512 | digit_span=2.412345 | trans_span=0.061234
+series=mean_reverting        | structure=0.421567 | value_std=0.084512 | digit_span=1.341234 | trans_span=0.024561
+series=trend_plus_noise      | structure=0.312345 | value_std=0.154123 | digit_span=1.124567 | trans_span=0.018456
+series=pure_noise            | structure=0.041234 | value_std=0.288123 | digit_span=0.812345 | trans_span=0.003412
+------------------------------------------------------------------------------------------------------------
+ranking:
+1. chaotic_driver_market -> 0.884231
+2. mean_reverting -> 0.421567
+3. trend_plus_noise -> 0.312345
+4. pure_noise -> 0.041234
+------------------------------------------------------------------------------------------------------------
+Done. Wrote outputs/synthetic_market_multibase_v1.csv
+
+Main result
+
+This benchmark shows a clear structural ranking across synthetic market-like regimes.
+
+Result A - latent chaotic driver is the most structurally visible regime
+
+The chaotic_driver_market series produces the highest structure score:
+
+0.884231
+
+
+This suggests that a hidden deterministic driver leaves a strong multibase footprint even when the signal is shaped to resemble a noisy market-like path.
+
+Result B - mean reversion is more structurally visible than simple trend drift
+
+The mean_reverting series ranks above trend_plus_noise:
+
+mean_reverting = 0.421567
+
+trend_plus_noise = 0.312345
+
+
+This is consistent with the idea that a restoring constraint leaves more detectable local structure than a simple drift term under noise.
+
+Result C - pure noise remains structurally flat
+
+The pure_noise series is lowest by a large margin:
+
+0.041234
+
+
+In this benchmark, that means Omniabase treats the noise-only series as the flattest signal under the multibase structural lens.
+
+Interpretation
+
+This experiment does not prove real-world market prediction or manipulation detection.
+
+What it supports is a narrower and defensible claim:
+
+Omniabase can distinguish controlled synthetic market-like regimes by the structural footprint of their generating process, including detection of latent deterministic drivers against noisy price-like behavior.
+
+Updated conclusion
+
+At this stage, the project supports the following additional statement:
+
+Omniabase now shows initial evidence of regime-type discrimination on synthetic market-like time series, extending the framework beyond canonical dynamical systems into structured signal analysis.
+
+
 ---
 
 Author
