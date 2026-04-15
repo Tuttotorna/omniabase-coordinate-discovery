@@ -1,0 +1,1 @@
+add minimal requirements file for v0 experiment
