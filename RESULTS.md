@@ -8,15 +8,13 @@ The first testbed is the logistic map.
 
 ---
 
-## Experiment 1 — Logistic map multibase signatures v0
+## Experiment 1 - Logistic map multibase signatures v0
 
 ### System
 
 Logistic map:
 
-\[
-x_{n+1} = r x_n (1 - x_n)
-\]
+`x_(n+1) = r * x_n * (1 - x_n)`
 
 ### Initial settings
 
@@ -29,13 +27,13 @@ x_{n+1} = r x_n (1 - x_n)
 
 ### Tested r values
 
-- 3.50
-- 3.55
-- 3.60
-- 3.70
-- 3.80
-- 3.90
-- 4.00
+- `3.50`
+- `3.55`
+- `3.60`
+- `3.70`
+- `3.80`
+- `3.90`
+- `4.00`
 
 ### Extracted minimal signatures
 
@@ -50,7 +48,7 @@ These were computed across the same scalar state represented simultaneously in b
 
 ### Run command
 
-```bash id="gfy85d"
+```bash
 python experiments/logistic_map_multibase_v0.py
 
 Observed output
@@ -76,7 +74,7 @@ The extracted Omniabase signatures repeat with the same cycle, showing that the 
 
 ---
 
-Experiment 2 — Regime summary across coarse r values
+Experiment 2 - Regime summary across coarse r values
 
 Purpose
 
@@ -183,7 +181,7 @@ r	unique_states	x_std	avg_digit_sum_std	digit_sum_span_std	repetition_span_std
 4.0	200	0.2917769	1.1593855	3.5160863	0.0664653
 
 
-Main result of Experiment 2
+Main result
 
 The Omniabase signatures do not saturate when the simple unique_states count saturates.
 
@@ -194,7 +192,7 @@ This suggests that Omniabase is not merely tracking obvious periodicity. It is s
 
 ---
 
-Experiment 3 — Fine-grained transition scan around the bifurcation region
+Experiment 3 - Fine-grained transition scan around the bifurcation region
 
 Purpose
 
@@ -259,7 +257,7 @@ r	unique_states	x_std	avg_digit_sum_std	digit_sum_span_std	avg_repetition_std	re
 3.610	250	0.21263155	1.19828552	3.19794033	0.00738670	0.05215007
 
 
-Main result of Experiment 3
+Main result
 
 Transition 1: period-4 to period-8
 
@@ -318,7 +316,7 @@ This suggests that Omniabase signatures may act as regime-transition amplifiers 
 
 ---
 
-Experiment 4 — Delta sensitivity across the transition scan
+Experiment 4 - Delta sensitivity across the transition scan
 
 Purpose
 
@@ -392,9 +390,9 @@ r_prev	r_curr	delta_unique_states	rel_delta_x_std	rel_delta_digit_sum_span_std	r
 3.546	3.548	0	0.00082486	0.02774720	0.14976269
 
 
-Main result of Experiment 4
+Main result
 
-Result A — transition amplification
+Result A - transition amplification
 
 At the critical transition:
 
@@ -415,7 +413,7 @@ But the relative change in digit_sum_span_std is:
 
 This means the Omniabase transition signal is amplified by roughly a factor of 40 relative to the simple scalar statistic.
 
-Result B — pre-transition sensitivity
+Result B - pre-transition sensitivity
 
 Even before the visible state jump:
 
@@ -436,7 +434,7 @@ But the relative change in digit_sum_span_std is already:
 
 This suggests that Omniabase is not only amplifying the transition after it happens. It is also sensing pre-transition tension earlier than the standard scalar variance.
 
-Result C — chaotic micro-structure
+Result C - chaotic micro-structure
 
 Inside the chaotic region, x_std increases only slowly and monotonically.
 
@@ -447,77 +445,25 @@ This indicates that Omniabase is not merely tracking amplitude. It is reacting t
 
 ---
 
-Current conclusion
+Experiment 5 - Synthetic transition score v1
 
-The current prototype now supports the following statement:
-
-Omniabase signatures do not merely follow regime changes.
-They appear to amplify and partially anticipate transition structure in a way that simple scalar statistics do not.
-
-This is still an early result. But it is already enough to justify the next phase of the project.
-
-At this point, Omniabase Coordinate Discovery is no longer only a speculative idea.
-
-It now has an initial empirical basis for the claim that:
-
-multi-base observation can expose latent transition structure that standard single-representation summaries under-express.
-
-
----
-
-Current status
-
-Current result status:
-
-periodic tracking: confirmed
-
-chaotic regime differentiation: confirmed
-
-transition amplification: confirmed
-
-pre-transition sensitivity: initial evidence confirmed
-
-
-
----
-
-Next step
-
-The next correct step is not to scale complexity too fast.
-
-It is to refine the candidate coordinates:
-
-improve the signature family
-
-compare them against more standard indicators
-
-test whether the effect holds on additional dynamical systems
-
-test whether the apparent anticipation is robust or accidental
-
----
-
-
-
----
-
-## Experiment 5 — Synthetic transition score v1
-
-### Purpose
+Purpose
 
 A synthetic score was introduced to move from dispersed indicators to a single composite measure of structural transition pressure.
 
 The goal was to test whether a unified Omniabase score could act as a practical detector of:
 
-- transition events
-- pre-transition tension
-- regime instability concentration
+transition events
+
+pre-transition tension
+
+regime instability concentration
+
 
 rather than requiring manual inspection of multiple raw metrics.
 
-### Run command
+Run command
 
-```bash id="j6229q"
 python experiments/build_transition_score_v1.py
 
 Observed console output
@@ -577,7 +523,7 @@ r	unique_states	x_std	digit_sum_span_std	repetition_span_std	transition_score_v1
 3.610	250	0.21263155	3.19794033	0.05215007	0.380064
 
 
-Main result of Experiment 5
+Main result
 
 The synthetic score works, but it has a specific character:
 
@@ -586,7 +532,7 @@ it is strong as a transition-event detector
 it is not yet a clean state estimator
 
 
-Result A — first transition marked sharply
+Result A - first transition marked sharply
 
 The first period-doubling transition is strongly marked:
 
@@ -597,7 +543,7 @@ r = 3.544 -> score 0.347596
 
 This is a large jump despite only a weak change in simple scalar variance.
 
-Result B — strongest peak near explosion into chaos
+Result B - strongest peak near explosion into chaos
 
 The maximum score appears at:
 
@@ -608,7 +554,7 @@ transition_score_v1 = 0.457850
 
 This is exactly the region where the system leaves clearly periodic behavior and explodes toward chaotic occupancy.
 
-Result C — pre-transition tension exists
+Result C - pre-transition tension exists
 
 Before the visible state jump:
 
@@ -621,11 +567,11 @@ This is already a large relative increase while unique_states remains unchanged.
 
 So the score preserves the earlier result: Omniabase appears to detect pre-transition tension before obvious scalar summaries react strongly.
 
-Result D — chaotic region keeps breathing
+Result D - chaotic region keeps breathing
 
 After the main transition, the score does not stay saturated. It oscillates roughly between 0.20 and 0.38.
 
-This suggests the score is still reacting to internal structural modulation inside chaos, rather than collapsing into a flat “chaos = maximum” indicator.
+This suggests the score is still reacting to internal structural modulation inside chaos, rather than collapsing into a flat chaos = maximum indicator.
 
 Interpretation
 
@@ -644,119 +590,66 @@ The score is already useful. But its current weighting gives strong influence to
 
 ---
 
-Updated conclusion
+Current conclusion
 
-At this point the project supports two separate claims:
+The current prototype supports the following statements:
 
-1. Omniabase signatures can amplify and partially anticipate regime transitions.
-
-
-2. A synthetic Omniabase score can compress those effects into a practical event detector.
+1. Omniabase signatures track periodic regime structure.
 
 
+2. Omniabase signatures continue differentiating regimes after simple state counters saturate.
 
-The next question is stricter:
 
-Can the score also detect ordered windows inside chaos?
+3. Omniabase signatures amplify transition boundaries more strongly than simple scalar statistics such as x_std.
 
-If yes, then the method is not merely detecting explosive edges. It is detecting latent structure more generally.
 
-This motivates the next experiment around the known periodic window near r ~ 3.83.
+4. Omniabase signatures show initial evidence of pre-transition sensitivity.
 
----
 
-**2. Nuovo file**  
-`NEXT_STEPS.md`
+5. A synthetic Omniabase score can compress those effects into a practical event detector.
 
-**Contenuto completo**
-```md id="84931"
-# Next Steps
 
-## Current position
 
-The repository now has three stable findings on the logistic map:
+At this point, Omniabase Coordinate Discovery is no longer only a speculative idea.
 
-1. raw multi-base signatures track periodic regimes correctly
-2. cross-base signatures amplify transition regions more strongly than simple scalar variance
-3. a first synthetic score (`transition_score_v1`) behaves as a strong event detector
+It now has an initial empirical basis for the claim that:
 
----
-
-## What is now known
-
-### Confirmed
-
-- periodic tracking works
-- transition amplification works
-- pre-transition sensitivity has initial evidence
-- the synthetic score is effective at highlighting regime breaks
-
-### Not yet confirmed
-
-- whether the score is a good state estimator
-- whether the score cleanly detects windows of order inside chaos
-- whether the anticipation effect is robust across systems
-
----
-
-## Immediate next experiment
-
-The next correct test is a local scan around the periodic window near:
-
-- `r ~ 3.83`
-
-This test matters because it separates two possibilities:
-
-### Possibility A
-
-The current score is only reacting to violent transitions and local discontinuities.
-
-### Possibility B
-
-The current score is detecting deeper latent structure, and should therefore drop inside a stable periodic window embedded in chaos.
-
-If possibility B holds, the method becomes significantly stronger.
-
----
-
-## Hypothesis for the next test
-
-Inside a known periodic window within the chaotic region:
-
-- `transition_score_v1` should decrease
-- the score should rise again near the window boundaries
-- this drop should be sharper or more interpretable than what `x_std` alone provides
-
----
-
-## Next file to build
-
-```text id="lbn7sw"
-experiments/window_scan_383_v1.py
+multi-base observation can expose latent transition structure that standard single-representation summaries under-express.
 
 
 ---
 
-Operational rule
+Current status
 
-Do not change the dynamical system yet.
+periodic tracking: confirmed
 
-Do not add complexity yet.
+chaotic regime differentiation: confirmed
 
-First test whether the current coordinate family can detect:
+transition amplification: confirmed
 
-periodic regimes
+pre-transition sensitivity: initial evidence confirmed
 
-transitions
-
-ordered islands inside chaos
+synthetic event score: confirmed
 
 
-Only after that decide whether the signature family is robust enough to generalize.
+
+---
+
+Next step
+
+The next correct step is not to scale complexity too fast.
+
+It is to test whether the current score also detects ordered windows inside chaos.
+
+A strong next target is the known periodic window near r ~ 3.83.
+
+If the score drops there and rises again at the window boundaries, the method becomes significantly stronger.
+
+That would show that it is not merely detecting explosive edges, but also latent structure inside chaos.
+
 
 ---
 
 Author
 
 Massimiliano Brighindi
-
