@@ -4,6 +4,9 @@
 
 Omniabase Coordinate Discovery V1 is the **Coordinate Discovery branch** of the broader **OMNIABASE** framework.
 
+**Author:** Massimiliano Brighindi  
+**Contact:** brighissimo@gmail.com
+
 It is an experimental multibase structural analysis framework designed to expose hidden coordinates, latent signatures, regime separations, and structural footprints that may remain compressed or invisible under ordinary single-representation observation.
 
 It does not read meaning.  
@@ -14,9 +17,9 @@ It measures how a signal behaves when the same state is represented across multi
 
 ---
 
-## Position inside OMNIABASE
+## Position Inside OMNIABASE
 
-**OMNIABASE** is the general multirepresentational framework.
+**[OMNIABASE](https://github.com/Tuttotorna/OMNIABASE)** is the general multirepresentational framework.
 
 It begins from one principle:
 
@@ -32,11 +35,11 @@ In that sense, this repository is not the whole framework.
 
 It is the **Coordinate Discovery** branch of OMNIABASE.
 
-Where **OMNIA** asks whether apparent stability survives representational change, **Omniabase Coordinate Discovery** asks whether new descriptive axes, hidden separations, or latent structural coordinates emerge through representational variation.
+Where **[OMNIA](https://github.com/Tuttotorna/OMNIA)** asks whether apparent stability survives representational change, **Omniabase Coordinate Discovery** asks whether new descriptive axes, hidden separations, or latent structural coordinates emerge through representational variation.
 
 ---
 
-## Core idea
+## Core Idea
 
 A system may look flat, random, or ordinary in one representation while still carrying structural fingerprints across many representations.
 
@@ -52,7 +55,7 @@ This makes V1 a **pre-semantic structural sensor** for hidden coordinate exposur
 
 ---
 
-## What V1 currently supports
+## What V1 Currently Supports
 
 Omniabase Coordinate Discovery V1 has benchmark evidence across:
 
@@ -78,7 +81,7 @@ Tested families include:
 
 ---
 
-## What it measures
+## What It Measures
 
 The current V1 signature family includes simple structural descriptors such as:
 
@@ -102,7 +105,7 @@ From these, V1 has already produced experimental evidence for:
 
 ---
 
-## What this branch is trying to expose
+## What This Branch Is Trying to Expose
 
 This repository is not primarily about deciding whether a system is safe, valid, or correct.
 
@@ -121,7 +124,7 @@ It asks whether something structurally relevant becomes visible only through mul
 
 ---
 
-## What Omniabase Coordinate Discovery is not
+## What Omniabase Coordinate Discovery Is Not
 
 Omniabase Coordinate Discovery V1 is not:
 
@@ -141,7 +144,7 @@ Its strength is **structural footprint sensing and hidden-coordinate exposure un
 
 ---
 
-## Best current description
+## Best Current Description
 
 The strongest accurate description of Omniabase Coordinate Discovery V1 is:
 
@@ -153,7 +156,7 @@ Or more simply:
 
 ---
 
-## Why this branch matters
+## Why This Branch Matters
 
 Many phenomena are still studied inside one chosen representation.
 
@@ -171,7 +174,7 @@ This branch exists to test that possibility in a disciplined way.
 
 ---
 
-## Repository structure
+## Repository Structure
 
 This repository contains:
 
@@ -188,7 +191,7 @@ Suggested reading order:
 
 ---
 
-## Current status
+## Current Status
 
 Omniabase Coordinate Discovery V1 is no longer a single intuition.
 
@@ -200,7 +203,7 @@ It is careful consolidation, clean documentation, stronger coordinate interpreta
 
 ---
 
-## V1 scope boundary
+## V1 Scope Boundary
 
 See:
 
@@ -225,17 +228,29 @@ for the current benchmark record.
 
 ---
 
-## Relationship to the broader ecosystem
+## Relationship to the Broader Ecosystem
 
 At a high level:
 
-- `OMNIABASE` -> umbrella framework
-- `OMNIA` -> Diagnostics / Structural Measurement branch
-- `omniabase-coordinate-discovery` -> Coordinate Discovery branch
-- `omega-translator` and related repos -> Cross-Representation Translation branch
-- `observer-suspension` -> epistemic pre-layer
+- **[OMNIABASE](https://github.com/Tuttotorna/OMNIABASE)** -> umbrella framework
+- **[OMNIA](https://github.com/Tuttotorna/OMNIA)** -> Diagnostics / Structural Measurement branch
+- **[omniabase-coordinate-discovery](https://github.com/Tuttotorna/omniabase-coordinate-discovery)** -> Coordinate Discovery branch
+- **[omega-translator](https://github.com/Tuttotorna/omega-translator)** and related repos -> Cross-Representation Translation branch
+- **[observer-suspension](https://github.com/Tuttotorna/observer-suspension)** -> epistemic pre-layer
 
 This repository should therefore be read as one branch inside a broader multirepresentational architecture.
+
+---
+
+## Related Repositories
+
+For the shortest functional reading of the broader ecosystem:
+
+- **[OMNIABASE](https://github.com/Tuttotorna/OMNIABASE)** — umbrella framework
+- **[OMNIA](https://github.com/Tuttotorna/OMNIA)** — Diagnostics / Structural Measurement branch
+- **[observer-suspension](https://github.com/Tuttotorna/observer-suspension)** — epistemic pre-layer
+- **[omega-translator](https://github.com/Tuttotorna/omega-translator)** — Cross-Representation Translation branch
+- **[lon-mirror](https://github.com/Tuttotorna/lon-mirror)** — historical and operational core of the OMNIA diagnostics lineage
 
 ---
 
